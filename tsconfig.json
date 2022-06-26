@@ -21,7 +21,7 @@
     "node_modules",
     "next.config.mjs",
     ".prismic/slice-template/*.tsx",
-    "libs/types/prismic.tsx"
+    "libs/types.tsx/prismic.tsx"
   ],
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]
 }
