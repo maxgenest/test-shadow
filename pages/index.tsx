@@ -26,17 +26,34 @@ const HomePage: NextPage = () => {
   );
 };
 
-const Wrapper = styled.div``;
-const Title = styled.h1``;
+const Wrapper = styled.div`
+  background-color: ${({ theme }) => theme.color.black};
+  color: ${({ theme }) => theme.color.white};
+  padding: ${({ theme }) => theme.spacing.l};
+`;
+const Title = styled.h1`
+  ${({ theme }) => theme.typo.xxl};
+
+  border-bottom: 1px solid ${({ theme }) => theme.color.white};
+  padding-bottom: ${({ theme }) => theme.spacing.m};
+  margin-bottom: ${({ theme }) => theme.spacing.m};
+`;
 const Grid = styled.div`
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(1, 1fr);
+  gap: ${({ theme }) => theme.spacing.m};
 
   @media screen and (min-width: ${DEVICE_WIDTH.MOBILE}px) {
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(2, 1fr);
   }
 `;
-const Item = styled.div``;
-const ItemName = styled.p``;
+const Item = styled.div`
+  border: 1px solid ${({ theme }) => theme.color.white};
+  border-radius: ${({ theme }) => theme.spacing.m};
+  padding: ${({ theme }) => theme.spacing.m};
+`;
+const ItemName = styled.p`
+  ${({ theme }) => theme.typo.xl};
+`;
 
 export default HomePage;
