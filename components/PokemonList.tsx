@@ -7,27 +7,39 @@ import Link from "next/link";
 interface IProps {
   data: any[];
   error: string;
-  className?: string;
+  searchedPokemon?: string;
 }
 
-export const PokemonList: React.FC<IProps> = ({ data, error, className }) => {
+export const PokemonList: React.FC<IProps> = ({
+  data,
+  error,
+  searchedPokemon,
+}) => {
   if (error) return <div>Une erreur est survenue au chargement de la data</div>;
   if (!data) return <div>Chargement...</div>;
 
   return (
-    <Grid className={className}>
+    <Grid>
       {data.map((page) =>
-        page.results.map((pokemon: IPokemon) => (
-          <Item key={pokemon.name} href={`/pokemon/${pokemon.name}`}>
-            <ItemName>{pokemon.name}</ItemName>
-          </Item>
-        ))
+        page.results
+          .filter(
+            (pokemon: IPokemon) =>
+              searchedPokemon === undefined ||
+              pokemon.name.startsWith(searchedPokemon)
+          )
+          .map((pokemon: IPokemon) => (
+            <Item key={pokemon.name}>
+              <Link href={`/pokemon/${pokemon.name}`}>
+                <ItemName>{pokemon.name}</ItemName>
+              </Link>
+            </Item>
+          ))
       )}
     </Grid>
   );
 };
 
-const Grid = styled.div`
+const Grid = styled.ul`
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   gap: ${({ theme }) => theme.spacing.m};
@@ -36,7 +48,7 @@ const Grid = styled.div`
     grid-template-columns: repeat(2, 1fr);
   }
 `;
-const Item = styled(Link)`
+const Item = styled.li`
   border: 1px solid ${({ theme }) => theme.color.white};
   border-radius: ${({ theme }) => theme.spacing.m};
   padding: ${({ theme }) => theme.spacing.m};
@@ -48,5 +60,5 @@ const Item = styled(Link)`
   }
 `;
 const ItemName = styled.p`
-  ${({ theme }) => theme.typo.xl};
+  ${({ theme }) => theme.typo.l};
 `;
