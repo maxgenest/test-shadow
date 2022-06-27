@@ -1,7 +1,8 @@
 import React, { Ref } from "react";
 import { IPokemon } from "../libs/types";
 import styled from "styled-components";
-import { DEVICE_WIDTH } from "../libs/utils/constants";
+import { DEVICE_WIDTH, API_URL } from "../libs/utils/constants";
+import Link from "next/link";
 
 interface IProps {
   data: any[];
@@ -17,7 +18,7 @@ export const PokemonList: React.FC<IProps> = ({ data, error, className }) => {
     <Grid className={className}>
       {data.map((page) =>
         page.results.map((pokemon: IPokemon) => (
-          <Item key={pokemon.name}>
+          <Item key={pokemon.name} href={`/pokemon/${pokemon.name}`}>
             <ItemName>{pokemon.name}</ItemName>
           </Item>
         ))
@@ -35,10 +36,16 @@ const Grid = styled.div`
     grid-template-columns: repeat(2, 1fr);
   }
 `;
-const Item = styled.div`
+const Item = styled(Link)`
   border: 1px solid ${({ theme }) => theme.color.white};
   border-radius: ${({ theme }) => theme.spacing.m};
   padding: ${({ theme }) => theme.spacing.m};
+  cursor: pointer;
+
+  :hover {
+    background-color: ${({ theme }) => theme.color.white};
+    color: ${({ theme }) => theme.color.black};
+  }
 `;
 const ItemName = styled.p`
   ${({ theme }) => theme.typo.xl};

@@ -3,3 +3,5 @@ export enum DEVICE_WIDTH {
   TABLET = 1024,
   DESKTOP = 1440,
 }
+
+export const API_URL = "https://pokeapi.co/api/v2";

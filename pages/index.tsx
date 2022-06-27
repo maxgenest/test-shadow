@@ -3,6 +3,7 @@ import { NextPage } from "next";
 import { useSwrPokemonList } from "libs/swr";
 import { useEffect, useRef } from "react";
 import { PokemonList } from "components/PokemonList";
+import { Wrapper } from "styles/shared";
 
 const HomePage: NextPage = () => {
   const { data, error, isValidating, mutate, size, setSize } =
@@ -28,11 +29,6 @@ const HomePage: NextPage = () => {
   );
 };
 
-const Wrapper = styled.div`
-  background-color: ${({ theme }) => theme.color.black};
-  color: ${({ theme }) => theme.color.white};
-  padding: ${({ theme }) => theme.spacing.l};
-`;
 const Title = styled.h1`
   ${({ theme }) => theme.typo.xxl};
 
